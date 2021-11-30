@@ -4,10 +4,10 @@ class Produtos extends React.Component {
     render() {
         return (
             <div>
-                <img src="https://picsum.photos/seed/picsum/200/300" /> 
+                <img src={this.props.produtos.foto} /> 
                 <div>
-                    <p> Produto Exemplo </p>
-                    <p> R$777,00 </p>
+                    <p>{this.props.produtos.nome}</p>
+                    <p>R$ {this.props.produtos.preco},00 </p>
                     <button> Adicionar ao carrinho </button>
                 </div>
             </div>)
