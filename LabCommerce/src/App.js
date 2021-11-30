@@ -50,13 +50,50 @@ class App extends React.Component {
         foto: 'https://picsum.photos/200/300?random=6',
       },
     ],
+    produtosNoCarrinho: [
+      {
+        id: 6,
+        nome: 'Produto 6',
+        preco: 600.0,
+        foto: 'https://picsum.photos/200/300?random=6',
+      },
+      {
+        id: 5,
+        nome: 'Produto 5',
+        preco: 500.0,
+        foto: 'https://picsum.photos/200/300?random=5',
+      },
+    ],
+    total: 1100,
   };
+
+  adicionarAoCarrinho = (produtoId) => {
+    const novoProdutoCarrinho = this.state.produtos.find(
+      (produto) => produtoId === produto.id
+    );
+    const novosProdutosCarrinho = [
+      ...this.state.produtosNoCarrinho,
+      novoProdutoCarrinho,
+    ];
+    const Total = novosProdutosCarrinho
+      .map((produto) => produto.preco)
+      .reduce((total, elemento) => total + elemento);
+
+    this.setState({ produtosNoCarrinho: novosProdutosCarrinho, total: Total });
+  };
+
   render() {
     return (
       <Body>
         <Filtro />
-        <Cards produtos={this.state.produtos} />
-        <Carrinho />
+        <Cards
+          produtos={this.state.produtos}
+          adicionarAoCarrinho={this.adicionarAoCarrinho}
+        />
+        <Carrinho
+          produtosCarrinho={this.state.produtosNoCarrinho}
+          total={this.state.total}
+        />
       </Body>
     );
   }

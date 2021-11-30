@@ -39,7 +39,11 @@ class Cards extends React.Component {
         </Nav>
         <ListaProdutos>
           {this.props.produtos.map((produto) => (
-            <Produtos key={produto.id} produtos={produto} />
+            <Produtos
+              key={produto.id}
+              produtos={produto}
+              adicionarAoCarrinho={this.props.adicionarAoCarrinho}
+            />
           ))}
         </ListaProdutos>
       </Container>
