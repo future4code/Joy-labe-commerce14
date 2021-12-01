@@ -26,17 +26,27 @@ class Filtro extends React.Component {
         <InputTag>
           <label>Valor Mínimo </label>
           <br />
-          <input type="number" />
+          <input type="number"
+            value={this.props.valorMinimo}
+            onChange={this.props.onChangeValorMinimo}
+          />
         </InputTag>
         <InputTag>
           <label>Valor Maximo </label>
           <br />
-          <input type="number" />
+          <input type="number"
+            value={this.props.valorMaximo}
+            onChange={this.props.onChangeValorMaximo}
+
+          />
         </InputTag>
         <InputTag>
           <label>Nome do produto </label>
           <br />
-          <input type="text" />
+          <input type="text"
+          value={this.props.peloNome}
+          onChange={this.props.onChangePeloNome}
+          />
         </InputTag>
       </Container>
     );

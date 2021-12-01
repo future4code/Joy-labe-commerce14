@@ -3,6 +3,7 @@ import Carrinho from './components/Carrinho';
 import Cards from './components/Cards';
 import Filtro from './components/Filtro';
 import styled from 'styled-components';
+import Produtos from './components/Produtos';
 
 const Body = styled.div`
   display: grid;
@@ -12,6 +13,9 @@ const Body = styled.div`
 
 class App extends React.Component {
   state = {
+    valorMinimo: 100,
+    valorMaximo: 1000,
+    peloNome: 'Produto',
     produtos: [
       {
         id: 1,
@@ -67,6 +71,19 @@ class App extends React.Component {
     total: 1100,
   };
 
+  onChangeValorMinimo = (e) => {
+    this.setState({valorMinimo: e.target.value})
+  }
+
+  onChangeValorMaximo = (e) => {
+    this.setState({valorMaximo: e.target.value})
+  }
+
+  onChangePeloNome = (e) => {
+    this.setState({peloNome: e.target.value})
+  }
+
+
   adicionarAoCarrinho = (produtoId) => {
     const novoProdutoCarrinho = this.state.produtos.find(
       (produto) => produtoId === produto.id
@@ -85,7 +102,7 @@ class App extends React.Component {
   render() {
     return (
       <Body>
-        <Filtro />
+        <Filtro/>
         <Cards
           produtos={this.state.produtos}
           adicionarAoCarrinho={this.adicionarAoCarrinho}
@@ -93,6 +110,13 @@ class App extends React.Component {
         <Carrinho
           produtosCarrinho={this.state.produtosNoCarrinho}
           total={this.state.total}
+        />
+
+        <Produtos
+        produtos={this.state.produtos}
+        valorMinimo={this.state.valorMinimo}
+        valorMaximo={this.state.valorMaximo}
+        peloNome={this.state.peloNome}
         />
       </Body>
     );
