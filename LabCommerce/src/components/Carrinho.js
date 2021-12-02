@@ -23,6 +23,7 @@ class Carrinho extends React.Component {
             <p>{produto.quantidade}x</p>
             <p>{produto.nome}</p>
             <p>R$ {produto.preco},00</p>
+            <button onClick={() => this.props.removerDoCarrinho(produto.id)}>Remover</button>
           </ContainerFlex>
         ))}
         <p>Valor Total: R$ {this.props.total},00</p>

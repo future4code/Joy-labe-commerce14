@@ -99,8 +99,9 @@ class App extends React.Component {
       });
 
       const total = novosProdutosCarrinho.reduce(
-        (total, produto) => total + produto.preco * produto.quantidade,0
-        );
+        (total, produto) => total + produto.preco * produto.quantidade,
+        0,
+      );
 
       this.setState({
         produtosNoCarrinho: novosProdutosCarrinho,
@@ -123,12 +124,34 @@ class App extends React.Component {
     }
   };
 
+  removerDoCarrinho = (produtoId) => {
+    const removerProduto = this.state.produtosNoCarrinho
+      .map((produto) => {
+        if (produtoId === produto.id) {
+          return { ...produto, quantidade: produto.quantidade - 1 };
+        }
+        return produto;
+      })
+      .filter((produto) => produto.quantidade > 0);
+
+    const total = removerProduto.reduce(
+      (total, produto) => total + produto.preco * produto.quantidade,
+      0,
+    );
+
+    this.setState({ produtosNoCarrinho: removerProduto, total: total });
+  };
+
   render() {
     return (
       <Body>
         <Filtro />
         <Cards produtos={this.state.produtos} adicionarAoCarrinho={this.adicionarAoCarrinho} />
-        <Carrinho produtosCarrinho={this.state.produtosNoCarrinho} total={this.state.total} />
+        <Carrinho
+          produtosCarrinho={this.state.produtosNoCarrinho}
+          total={this.state.total}
+          removerDoCarrinho={this.removerDoCarrinho}
+        />
 
         <Produtos
           produtos={this.state.produtos}
