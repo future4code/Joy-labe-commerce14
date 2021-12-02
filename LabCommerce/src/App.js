@@ -60,63 +60,104 @@ class App extends React.Component {
         nome: 'Produto 6',
         preco: 600.0,
         foto: 'https://picsum.photos/200/300?random=6',
+        quantidade: 1,
       },
       {
         id: 5,
         nome: 'Produto 5',
         preco: 500.0,
         foto: 'https://picsum.photos/200/300?random=5',
+        quantidade: 1,
       },
     ],
     total: 1100,
   };
 
   onChangeValorMinimo = (e) => {
-    this.setState({valorMinimo: e.target.value})
-  }
+    this.setState({ valorMinimo: e.target.value });
+  };
 
   onChangeValorMaximo = (e) => {
-    this.setState({valorMaximo: e.target.value})
-  }
+    this.setState({ valorMaximo: e.target.value });
+  };
 
   onChangePeloNome = (e) => {
-    this.setState({peloNome: e.target.value})
-  }
-
+    this.setState({ peloNome: e.target.value });
+  };
 
   adicionarAoCarrinho = (produtoId) => {
-    const novoProdutoCarrinho = this.state.produtos.find(
-      (produto) => produtoId === produto.id
+    const produtoExistenteCarrinho = this.state.produtosNoCarrinho.find(
+      (produto) => produtoId === produto.id,
     );
-    const novosProdutosCarrinho = [
-      ...this.state.produtosNoCarrinho,
-      novoProdutoCarrinho,
-    ];
-    const Total = novosProdutosCarrinho
-      .map((produto) => produto.preco)
-      .reduce((total, elemento) => total + elemento);
 
-    this.setState({ produtosNoCarrinho: novosProdutosCarrinho, total: Total });
+    if (produtoExistenteCarrinho) {
+      const novosProdutosCarrinho = this.state.produtosNoCarrinho.map((produto) => {
+        if (produtoId === produto.id) {
+          return { ...produto, quantidade: produto.quantidade + 1 };
+        }
+        return produto;
+      });
+
+      const total = novosProdutosCarrinho.reduce(
+        (total, produto) => total + produto.preco * produto.quantidade,
+        0,
+      );
+
+      this.setState({
+        produtosNoCarrinho: novosProdutosCarrinho,
+        total: total,
+      });
+    } else {
+      const novoProdutoCarrinho = this.state.produtos.find((produto) => produtoId === produto.id);
+
+      const novosProdutosCarrinho = [
+        ...this.state.produtosNoCarrinho,
+        { ...novoProdutoCarrinho, quantidade: 1 },
+      ];
+
+      const total = novosProdutosCarrinho.reduce((total, produto) => total + produto.preco, 0);
+
+      this.setState({
+        produtosNoCarrinho: novosProdutosCarrinho,
+        total: total,
+      });
+    }
+  };
+
+  removerDoCarrinho = (produtoId) => {
+    const removerProduto = this.state.produtosNoCarrinho
+      .map((produto) => {
+        if (produtoId === produto.id) {
+          return { ...produto, quantidade: produto.quantidade - 1 };
+        }
+        return produto;
+      })
+      .filter((produto) => produto.quantidade > 0);
+
+    const total = removerProduto.reduce(
+      (total, produto) => total + produto.preco * produto.quantidade,
+      0,
+    );
+
+    this.setState({ produtosNoCarrinho: removerProduto, total: total });
   };
 
   render() {
     return (
       <Body>
-        <Filtro/>
-        <Cards
-          produtos={this.state.produtos}
-          adicionarAoCarrinho={this.adicionarAoCarrinho}
-        />
+        <Filtro />
+        <Cards produtos={this.state.produtos} adicionarAoCarrinho={this.adicionarAoCarrinho} />
         <Carrinho
           produtosCarrinho={this.state.produtosNoCarrinho}
           total={this.state.total}
+          removerDoCarrinho={this.removerDoCarrinho}
         />
 
         <Produtos
-        produtos={this.state.produtos}
-        valorMinimo={this.state.valorMinimo}
-        valorMaximo={this.state.valorMaximo}
-        peloNome={this.state.peloNome}
+          produtos={this.state.produtos}
+          valorMinimo={this.state.valorMinimo}
+          valorMaximo={this.state.valorMaximo}
+          peloNome={this.state.peloNome}
         />
       </Body>
     );

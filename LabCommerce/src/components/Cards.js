@@ -24,13 +24,11 @@ const Container = styled.div`
 `;
 
 class Cards extends React.Component {
-
   listaFiltrada = () => {
-    return this.props.produtos
-    
-  }
+    return this.props.produtos;
+  };
   render() {
-    const listaComFiltro = this.listaFiltrada ()
+    const listaComFiltro = this.listaFiltrada();
     return (
       <Container>
         <Nav>
@@ -38,13 +36,12 @@ class Cards extends React.Component {
           <div>
             <label>Ordenar por ordem:</label>
             <select>
-            <option >Crescente</option>
-            <option >Decrescente</option>
+              <option>Crescente</option>
+              <option>Decrescente</option>
             </select>
           </div>
         </Nav>
         <ListaProdutos>
-          
           {this.props.produtos.map((produto) => (
             <Produtos
               key={produto.id}
@@ -53,7 +50,6 @@ class Cards extends React.Component {
             />
           ))}
         </ListaProdutos>
-        
       </Container>
     );
   }
