@@ -2,7 +2,7 @@
   {
     "id": "1",
     "nome": "Produto 1",
-    "preco": "100.0",
+    "preco": "100",
     "foto": "https://picsum.photos/200/300?random=2"
   },
   {
