@@ -91,8 +91,21 @@ class App extends React.Component {
   render() {
     return (
       <Body>
-        <Filtro />
-        <Cards produtos={this.state.produtos} adicionarAoCarrinho={this.adicionarAoCarrinho} />
+        <Filtro
+        valorMaximo={this.state.valorMaximo}
+        valorMinimo={this.state.valorMinimo}
+        peloNome={this.state.peloNome}
+        onChangePeloNome={this.onChangePeloNome}
+        onChangeValorMaximo={this.onChangeValorMaximo}
+        onChangeValorMinimo={this.onChangeValorMinimo}
+         />
+        <Cards
+        produtos={this.state.produtos} 
+        adicionarAoCarrinho={this.adicionarAoCarrinho}
+        valorMaximo={this.state.valorMaximo}
+        valorMinimo={this.state.valorMinimo}
+        peloNome={this.state.peloNome}
+        />
         <Carrinho
           produtosCarrinho={this.state.produtosNoCarrinho}
           total={this.state.total}
