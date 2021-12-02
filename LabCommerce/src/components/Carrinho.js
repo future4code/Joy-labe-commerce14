@@ -20,7 +20,7 @@ class Carrinho extends React.Component {
         <h4>Carrinho</h4>
         {this.props.produtosCarrinho.map((produto) => (
           <ContainerFlex>
-            <p>1x</p>
+            <p>{produto.quantidade}</p>
             <p>{produto.nome}</p>
             <p>R$ {produto.preco},00</p>
           </ContainerFlex>
