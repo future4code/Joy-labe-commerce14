@@ -19,6 +19,15 @@ const InputTag = styled.div`
 `;
 
 class Filtro extends React.Component {
+  
+  listaFiltrada = () => {
+    return this.props.produtos
+      .sort((a, b) => this.state.sort === 'CRESCENTE' ? a.preco - b.preco : b.preco - a.preco)
+      .filter((produto) => produto.nome.toLowerCase().includes(this.props.peloNome.toLowerCase()))
+      .filter((produto) => produto.preco >= this.props.valorMinimo || this.props.valorMinimo === '')
+      .filter((produto) => produto.preco <= this.props.valorMaximo || this.props.valorMaximo === '' );
+      
+  };
   render() {
     return (
       <Container>
