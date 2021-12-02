@@ -40,12 +40,9 @@ class App extends React.Component {
     );
 
     if (produtoExistenteCarrinho) {
-      const novosProdutosCarrinho = this.state.produtosNoCarrinho.map((produto) => {
-        if (produtoId === produto.id) {
-          return { ...produto, quantidade: produto.quantidade + 1 };
-        }
-        return produto;
-      });
+      const novosProdutosCarrinho = this.state.produtosNoCarrinho.map((produto) =>
+        produtoId === produto.id ? { ...produto, quantidade: produto.quantidade + 1 } : produto,
+      );
 
       const total = novosProdutosCarrinho.reduce(
         (total, produto) => total + produto.preco * produto.quantidade,
@@ -78,12 +75,9 @@ class App extends React.Component {
 
   removerDoCarrinho = (produtoId) => {
     const removerProduto = this.state.produtosNoCarrinho
-      .map((produto) => {
-        if (produtoId === produto.id) {
-          return { ...produto, quantidade: produto.quantidade - 1 };
-        }
-        return produto;
-      })
+      .map((produto) =>
+        produtoId === produto.id ? { ...produto, quantidade: produto.quantidade - 1 } : produto,
+      )
       .filter((produto) => produto.quantidade > 0);
 
     const total = removerProduto.reduce(
