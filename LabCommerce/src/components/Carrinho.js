@@ -15,7 +15,6 @@ const ContainerFlex = styled.div`
 
 class Carrinho extends React.Component {
   render() {
-  
     return (
       <Container>
         <h4>Carrinho</h4>
@@ -27,7 +26,7 @@ class Carrinho extends React.Component {
             <button onClick={() => this.props.removerDoCarrinho(produto.id)}>Remover</button>
           </ContainerFlex>
         ))}
-        <p>Valor Total: R$ {this.props.total},00</p>
+        {this.props.produtosCarrinho.length > 0 ? <p>Valor Total: R$ {this.props.total},00</p> : <p>O Carrinho está vazio</p>}
       </Container>
     );
   }
