@@ -7,6 +7,7 @@ const Nav = styled.div`
   justify-content: space-around;
   margin-bottom: 20px;
   padding: 10px;
+  
 `;
 
 const ListaProdutos = styled.div`
@@ -15,12 +16,14 @@ const ListaProdutos = styled.div`
   grid-row-gap: 30px;
   padding: 5px;
   margin: 10px;
+  margin-bottom: 2px;
 `;
 
 const Container = styled.div`
   border: solid 1px black;
   margin: 10px;
   padding: 10px;
+ 
 `;
 
 class Cards extends React.Component {

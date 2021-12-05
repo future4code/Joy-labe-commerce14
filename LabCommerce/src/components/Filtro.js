@@ -7,6 +7,7 @@ const Container = styled.div`
   border: solid 1px black;
   margin: 10px;
   padding: 10px;
+  
 `;
 
 const Titulo = styled.h2`

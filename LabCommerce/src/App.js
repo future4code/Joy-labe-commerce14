@@ -2,21 +2,26 @@ import React from 'react';
 import Carrinho from './components/Carrinho';
 import Cards from './components/Cards';
 import Filtro from './components/Filtro';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import styled from 'styled-components';
 import Produtos from './components/Produtos';
 import ListaProdutos from './components/ListaProdutos.json';
 
 const Body = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  justify-content: space-around;
+
 `;
 
+const Tela = styled.div`
+display: grid;
+grid-template-columns: 1fr 3fr 1fr;
+justify-content: space-around;
+`;
 class App extends React.Component {
   state = {
     valorMinimo: 100,
-    valorMaximo: 1000,
-    peloNome: 'Produto',
+    valorMaximo: 10000,
+    peloNome: 'Traje Espacial',
     produtos: ListaProdutos,
     produtosNoCarrinho: [],
     total: 0,
@@ -90,7 +95,10 @@ class App extends React.Component {
 
   render() {
     return (
+      
       <Body>
+        <Header/>
+        <Tela>
         <Filtro
         valorMaximo={this.state.valorMaximo}
         valorMinimo={this.state.valorMinimo}
@@ -111,12 +119,9 @@ class App extends React.Component {
           total={this.state.total}
           removerDoCarrinho={this.removerDoCarrinho}
         />
-        {/* <Produtos
-          produtos={this.state.produtos}
-          valorMinimo={this.state.valorMinimo}
-          valorMaximo={this.state.valorMaximo}
-          peloNome={this.state.peloNome}
-        /> */}
+        </Tela>
+  
+  <Footer/>
       </Body>
     );
   }
