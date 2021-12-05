@@ -9,24 +9,41 @@ const Container = styled.div`
 
 const ContainerFlex = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+`;
+
+const Texto = styled.p`
+  font-size: 16px;
+`;
+const Button = styled.button`
+  border-radius: 10px;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgrey;
+  }
 `;
 
 class Carrinho extends React.Component {
   render() {
     return (
       <Container>
-        <h4>Carrinho</h4>
+        <h3>Carrinho</h3>
         {this.props.produtosCarrinho.map((produto) => (
           <ContainerFlex>
-            <p>{produto.quantidade}x</p>
-            <p>{produto.nome}</p>
-            <p>R$ {produto.preco},00</p>
-            <button onClick={() => this.props.removerDoCarrinho(produto.id)}>Remover</button>
+            <Texto>{produto.quantidade}x</Texto>
+            <Texto>{produto.nome}</Texto>
+            <Texto>R$ {produto.preco},00</Texto>
+            <Button onClick={() => this.props.removerDoCarrinho(produto.id)}>Remover</Button>
           </ContainerFlex>
         ))}
-        {this.props.produtosCarrinho.length > 0 ? <p>Valor Total: R$ {this.props.total},00</p> : <p>O Carrinho está vazio</p>}
+        {this.props.produtosCarrinho.length > 0 ? (
+          <p>Valor Total: R$ {this.props.total},00</p>
+        ) : (
+          <p>O Carrinho está vazio</p>
+        )}
       </Container>
     );
   }

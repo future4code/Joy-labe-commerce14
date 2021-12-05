@@ -4,8 +4,9 @@ import Produtos from './Produtos';
 
 const Nav = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 20px;
+  align-items: center;
   padding: 10px;
   
 `;
@@ -13,7 +14,7 @@ const Nav = styled.div`
 const ListaProdutos = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-row-gap: 30px;
+  gap: 30px;
   padding: 5px;
   margin: 10px;
   margin-bottom: 2px;
@@ -23,7 +24,7 @@ const Container = styled.div`
   border: solid 1px black;
   margin: 10px;
   padding: 10px;
- 
+  min-height: 70vh;
 `;
 
 class Cards extends React.Component {
@@ -49,9 +50,9 @@ class Cards extends React.Component {
     return (
       <Container>
         <Nav>
-          <p>Produtos disponiveis:{listaComFiltro.length}</p>
+          <p><strong>Produtos disponiveis:</strong> {listaComFiltro.length}</p>
           <div>
-            <label>Ordenar por ordem:</label>
+            <label><strong>Ordenar por ordem:</strong></label>
             <select value={this.state.sort} onChange={this.onChangeSort}>
             <option value={'CRESCENTE'}>Crescente</option>
             <option value={'DECRESCENTE'}>Decrescente</option>
